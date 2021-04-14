@@ -1,5 +1,4 @@
 extends Node2D
-class_name Products
 var optics_list=[]
 var optics_name_list:PoolStringArray=[]
 class optics:

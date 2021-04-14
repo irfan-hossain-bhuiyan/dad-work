@@ -13,15 +13,9 @@ _global_script_classes=[ {
 "class": "GitAPI",
 "language": "NativeScript",
 "path": "res://git_api.gdns"
-}, {
-"base": "Node2D",
-"class": "Products",
-"language": "GDScript",
-"path": "res://data_types/product_database.gd"
 } ]
 _global_script_class_icons={
-"GitAPI": "",
-"Products": ""
+"GitAPI": ""
 }
 
 [application]
