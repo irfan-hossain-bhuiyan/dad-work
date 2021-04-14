@@ -10,12 +10,13 @@ func text_create(optical_data:Products.optics):
 "
 
 [node name="product_button" type="Button"]
-anchor_right = 0.323
-anchor_bottom = 0.2
-margin_right = 0.247986
+anchor_right = 1.0
+anchor_bottom = 1.833
+margin_right = -4.0
+margin_bottom = 0.199951
 script = SubResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="product_name" type="Label" parent="."]
