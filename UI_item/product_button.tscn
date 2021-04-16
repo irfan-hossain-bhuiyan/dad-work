@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://fonts/architect-s-daughter/ArchitectsDaughter32.tres" type="DynamicFont" id=1]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Button
@@ -11,25 +13,45 @@ func text_create(optical_data:Products.optics):
 
 [node name="product_button" type="Button"]
 anchor_right = 1.0
-anchor_bottom = 1.833
-margin_right = -4.0
-margin_bottom = 0.199951
+anchor_bottom = 0.263
+margin_right = -1.69794
+margin_bottom = 0.199997
+rect_min_size = Vector2( 1000, 158 )
+custom_fonts/font = ExtResource( 1 )
+clip_text = true
+expand_icon = true
 script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": true
 }
 
 [node name="product_name" type="Label" parent="."]
-margin_left = 13.0
-margin_top = 7.0
-margin_right = 217.0
-margin_bottom = 43.0
+anchor_left = 0.0237805
+anchor_top = 0.202228
+anchor_right = 0.444805
+anchor_bottom = 0.861
+margin_left = -0.375004
+margin_top = 0.0479994
+margin_right = 5.07498
+margin_bottom = -0.0380096
+custom_fonts/font = ExtResource( 1 )
+text = "fdfdfdfdf"
+valign = 1
 __meta__ = {
-"_edit_use_anchors_": false
+"_edit_use_anchors_": true
 }
 
 [node name="pcs" type="Label" parent="."]
-margin_left = 265.0
-margin_top = 4.0
-margin_right = 328.0
-margin_bottom = 26.0
+anchor_left = 0.647317
+anchor_top = 0.100949
+anchor_right = 0.975
+anchor_bottom = 0.759367
+margin_left = 0.499969
+margin_top = 0.05
+margin_right = -0.375
+margin_bottom = 0.019989
+custom_fonts/font = ExtResource( 1 )
+text = "pcs:"
+__meta__ = {
+"_edit_use_anchors_": true
+}

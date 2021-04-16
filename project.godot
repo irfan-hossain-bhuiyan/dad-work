@@ -23,6 +23,10 @@ _global_script_class_icons={
 config/name="Dad-work"
 config/icon="res://icon.png"
 
+[autoload]
+
+Products="*res://product_database.gd"
+
 [gdnative]
 
 singletons=[ "res://git_api.gdnlib" ]
