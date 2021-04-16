@@ -3,6 +3,7 @@ var optics_list=[]
 var optics_name_list:PoolStringArray=[]
 var sell_list_data=[]
 var buy_list_data=[]
+#TODO:Change pro_amo.y in every forloop to amount variable
 class sell_list:
 	var products_amounts:PoolVector2Array
 	var total_cost:int
@@ -15,6 +16,7 @@ class sell_list:
 			if pro_amo.y>product.amount:
 				return "you are out of stock."
 			total_cost+=product.amount*pro_amo.y
+			
 		if paid_money>total_cost:
 			return "you are losting money."
 		else:
@@ -32,9 +34,19 @@ class buy_list:
 	var products_amounts:PoolVector2Array
 	var total_cost:int
 	var date_time:Dictionary
-	static func create():
-		pass
-
+	static func create(products_amounts:PoolVector2Array):
+		var total_cost:int=0
+		for pro_amo in products_amounts:
+			var product:=Products.optics_list[pro_amo.x] as optics
+			if product.amount+pro_amo.y>product.Max_stock:
+				return "doesn't have max storage."
+			total_cost+=product.buy_price*pro_amo.y
+		var output=buy_list.new()
+		output.products_amounts=products_amounts
+		output.total_cost=total_cost
+		output.date_time=OS.get_datetime()
+		Products.buy_list_data.append(output)
+		return output
 
 class optics:
 	var Name:String
@@ -71,6 +83,3 @@ class optics:
 			return optical_product
 		return output
 
-	
-	
-	
