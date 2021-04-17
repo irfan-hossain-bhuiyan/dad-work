@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://UI_item/product_choicer.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/product_choicer.gd" type="Script" id=1]
+
 
 [node name="ScrollContainer" type="ScrollContainer"]
 anchor_top = 0.296667
