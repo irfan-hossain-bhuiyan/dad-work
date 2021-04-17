@@ -1,13 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://fonts/architect-s-daughter/ArchitectsDaughter32.tres" type="DynamicFont" id=1]
+[ext_resource path="res://themes/new_theme.tres" type="Theme" id=2]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Button
 
 func text_create(optical_data:Products.optics):
 	$product_name.text=optical_data.Name
-	$pcs.text=String(optical_data.amount)
+	$pcs.text=\"pcs: \"+String(optical_data.amount)
+	$max_amount.text=\"max amount: \"+String(optical_data.Max_stock)
 
 "
 
@@ -16,7 +18,7 @@ anchor_right = 1.0
 anchor_bottom = 0.263
 margin_right = -1.69794
 margin_bottom = 0.199997
-rect_min_size = Vector2( 1000, 75 )
+rect_min_size = Vector2( 1000, 150 )
 custom_fonts/font = ExtResource( 1 )
 clip_text = true
 expand_icon = true
@@ -54,4 +56,19 @@ custom_fonts/font = ExtResource( 1 )
 text = "pcs:"
 __meta__ = {
 "_edit_use_anchors_": true
+}
+
+[node name="max_amount" type="Label" parent="."]
+anchor_left = 0.648
+anchor_top = 0.519
+anchor_right = 0.862
+anchor_bottom = 0.861
+margin_left = 1.54828
+margin_top = -0.00200653
+margin_right = -0.224426
+margin_bottom = -0.0380096
+theme = ExtResource( 2 )
+text = "max amount:"
+__meta__ = {
+"_edit_use_anchors_": false
 }

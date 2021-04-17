@@ -4,6 +4,19 @@ var optics_name_list:PoolStringArray=[]
 var sell_list_data=[]
 var buy_list_data=[]
 #TODO:Change pro_amo.y in every for loop to amount variable
+func file_load():
+	var save_file:File=File.new()
+	if save_file.file_exists("%APPDATA%/inventory_app/save.txt"):
+		save_file.open("%APPDATA%/inventory_app/save.txt",_File.READ)
+		data_importer(save_file.get_line())
+	else:
+		save_file.open("%APPDATA%/inventory_app/save.txt",_File.WRITE)
+		save_file.close()	
+func file_save():
+	var save_file:File=File.new()
+	save_file.open("%APPDATA%/inventory_app/save.txt",_File.WRITE)
+	save_file.store_line(data_exporter())
+
 func data_importer(output):
 	#NOTE:data_importer will erase all the previous data
 	optics_list.clear()
