@@ -63,3 +63,4 @@ text = "max amount:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="button_down" from="." to="." method="_on_product_button_button_down"]
