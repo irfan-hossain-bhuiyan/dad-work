@@ -13,31 +13,29 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Label" type="Label" parent="."]
-margin_left = 40.0
-margin_top = 64.0
-margin_right = 360.0
-margin_bottom = 128.0
+[node name="headline" type="Label" parent="."]
+margin_left = 336.0
+margin_top = 24.0
+margin_right = 656.0
+margin_bottom = 88.0
 theme = ExtResource( 1 )
-text = "choose products"
-
-[node name="Label2" type="Label" parent="."]
-margin_left = 400.0
-margin_top = 64.0
-margin_right = 696.0
-margin_bottom = 128.0
-theme = ExtResource( 1 )
+text = "CHOOSE PRODUCT"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button" type="Button" parent="."]
-margin_left = 808.0
-margin_top = 64.0
-margin_right = 884.0
-margin_bottom = 124.0
+[node name="add_button" type="Button" parent="."]
+margin_left = 856.0
+margin_top = 32.0
+margin_right = 932.0
+margin_bottom = 92.0
 theme = ExtResource( 1 )
 text = "add"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_top = 104.0
+margin_right = 1024.0
+margin_bottom = 600.0
