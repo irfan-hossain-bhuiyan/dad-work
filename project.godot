@@ -27,6 +27,10 @@ config/icon="res://icon.png"
 
 Products="*res://Scripts/product_database.gd"
 
+[debug]
+
+gdscript/completion/autocomplete_setters_and_getters=true
+
 [gdnative]
 
 singletons=[ "res://git_api.gdnlib" ]
