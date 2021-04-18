@@ -6,16 +6,16 @@ var buy_list_data=[]
 #TODO:Change pro_amo.y in every for loop to amount variable
 func file_load():
 	var save_file:File=File.new()
-	if save_file.file_exists("%APPDATA%/inventory_app/save.txt"):
-		save_file.open("%APPDATA%/inventory_app/save.txt",File.READ)
-		data_importer(save_file.get_line())
+	if save_file.file_exists("user://savegame.save"):
+		save_file.open("user://savegame.save",File.READ)
+		data_importer(parse_json(save_file.get_line()))
 		save_file.close()
 	else:
-		save_file.open("%APPDATA%/inventory_app/save.txt",File.WRITE)
+		save_file.open("user://savegame.save",File.WRITE)
 		save_file.close()	
 func file_save():
 	var save_file:File=File.new()
-	save_file.open("%APPDATA%/inventory_app/save.txt",File.WRITE)
+	save_file.open("user://savegame.save",File.WRITE)
 	save_file.store_line(data_exporter())
 	save_file.close()
 
@@ -40,12 +40,12 @@ func data_exporter()->String:
 	"sell_list_data":[],
 	"buy_list_data":[]}
 	for optics in optics_list:
-		output["optics_list"].append(optics._export)
+		output["optics_list"].append(optics._export())
 	for sell_data in sell_list_data:
-		output["sell_list_data"].append(sell_data._export)
+		output["sell_list_data"].append(sell_data._export())
 	for buy_data in buy_list_data:
-		output["buy_list_data"].append(buy_data._export)
-	return parse_json(output)
+		output["buy_list_data"].append(buy_data._export())
+	return to_json(output)
 class sell_list:
 	var products_amounts:PoolVector2Array
 	var total_cost:int
@@ -60,11 +60,11 @@ class sell_list:
 		for pro_amo in products_amounts:
 			var product:=Products.optics_list[pro_amo.x] as optics
 			if pro_amo.y>product.amount:
-				return "you are out of stock."
-			total_cost+=product.amount*pro_amo.y
-		if money>total_cost:
+				return "you are out of stock "+product.Name
+			total_cost+=product.buy_price*pro_amo.y
+		if money<total_cost:
 			return "you are losting money."
-		return total_cost
+		return money-total_cost
 	func initiate():
 		var check=varify()
 		if check is int:
