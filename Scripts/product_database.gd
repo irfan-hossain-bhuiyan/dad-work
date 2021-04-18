@@ -25,13 +25,14 @@ func data_importer(output):
 	sell_list_data.clear()
 	buy_list_data.clear()
 	for x in output["optics_list"]:
-		var optic=optics._import(x)
+		var optic:optics=optics._import(x)
+		optics_name_list.append(optic.Name)
 		optics_list.append(optic)
-	for x in output["sell_data_list"]:
-		var sell=sell_list._import(x)
+	for x in output["sell_list_data"]:
+		var sell:sell_list=sell_list._import(x)
 		sell_list_data.append(sell)
-	for x in output["optics_list"]:
-		var buy=buy_list._import(x)
+	for x in output["buy_list_data"]:
+		var buy:buy_list=buy_list._import(x)
 		buy_list_data.append(buy)
 	
 
@@ -76,15 +77,20 @@ class sell_list:
 		
 
 	func _export():
-		return [products_amounts,money,total_cost,date_time]
+		var products=[]
+		var amounts=[]
+		for pro_amo in products_amounts:
+			products.append(pro_amo.x)
+			amounts.append(pro_amo.y)
+		return [products,amounts,money,total_cost,date_time]
 	static func _import(array:Array):
-		if len(array)!=4:
-			return "Import sell_list wasn't working"
-		else:
-			var output:=sell_list.new(array[0],array[1])
-			output.total_cost=array[2]
-			output.date_time=array[3]
-			return output
+		var temp:PoolVector2Array=[]
+		for x in range(len(array[0])):
+			temp.append(Vector2(array[0][x],array[1][x]))
+		var output:=sell_list.new(temp,array[2])
+		output.total_cost=array[3]
+		output.date_time=array[4]
+		return output
 
 class buy_list:
 	var products_amounts:PoolVector2Array
@@ -110,19 +116,23 @@ class buy_list:
 			total_cost=check
 			date_time=OS.get_datetime()
 			Products.buy_list_data.append(self)
-			
 		return check
 	
 	func _export():
-		return [products_amounts,total_cost,date_time]
-	static func _import(array:Array):
-		if len(array)!=3:
-			return "Import buy_list wasn't working"
-		else:
-			var output:=buy_list.new(array[0])
-			output.date_time=array[2]
-			output.total_cost=array[1]
-			return output
+		var products=[]
+		var amounts=[]
+		for pro_amo in products_amounts:
+			products.append(pro_amo.x)
+			amounts.append(pro_amo.y)
+		return [products,amounts,total_cost,date_time]
+	static func _import(array:Array)->buy_list:
+		var temp:PoolVector2Array=[]
+		for x in range(len(array[0])):
+			temp.append(Vector2(array[0][x],array[1][x]))
+		var output:=buy_list.new(temp)
+		output.date_time=array[3]
+		output.total_cost=array[2]
+		return output
 
 class optics:
 	var Name:String
@@ -154,10 +164,8 @@ class optics:
 	
 	func _export():
 		return [Name,Max_stock,buy_price,amount,product_id]
-	static	func _import(array:Array):
-		if len(array)!=5:
-			return "Import optics wasn't working"
-		else:
-			var output:=optics.new(array[0],array[1],array[2],array[3])
-			output.product_id=array[4]
+	static	func _import(array:Array)->optics:
+		var output:=optics.new(array[0],array[1],array[2],array[3])
+		output.product_id=array[4]
+		return output
 

@@ -30,15 +30,16 @@ Products="*res://Scripts/product_database.gd"
 [debug]
 
 gdscript/completion/autocomplete_setters_and_getters=true
+gdscript/warnings/unused_variable=false
+gdscript/warnings/shadowed_variable=false
 
 [gdnative]
 
 singletons=[ "res://git_api.gdnlib" ]
 
-[gui]
+[logging]
 
-theme/use_hidpi=true
-theme/custom="res://themes/new_theme.tres"
+file_logging/enable_file_logging=true
 
 [rendering]
 
