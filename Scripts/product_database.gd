@@ -1,6 +1,6 @@
 extends Node
 var optics_list=[]
-var optics_name_list:PoolStringArray=[]
+var optics_name_list=[]
 var sell_list_data=[]
 var buy_list_data=[]
 #TODO:Change pro_amo.y in every for loop to amount variable
@@ -71,7 +71,9 @@ class sell_list:
 			for pro_amo in products_amounts:
 				var product:=Products.optics_list[pro_amo.x] as optics
 				product.amount-=pro_amo.y
-		Products.sell_list_data.append(self)
+			Products.sell_list_data.append(self)
+		return check
+		
 
 	func _export():
 		return [products_amounts,money,total_cost,date_time]
@@ -108,8 +110,8 @@ class buy_list:
 			total_cost=check
 			date_time=OS.get_datetime()
 			Products.buy_list_data.append(self)
-		else:
-			return check
+			
+		return check
 	
 	func _export():
 		return [products_amounts,total_cost,date_time]
