@@ -25,7 +25,7 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Products="*res://product_database.gd"
+Products="*res://Scripts/product_database.gd"
 
 [gdnative]
 
