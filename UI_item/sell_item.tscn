@@ -2,7 +2,7 @@
 
 [ext_resource path="res://themes/new_theme.tres" type="Theme" id=1]
 
-[node name="Control" type="Control"]
+[node name="sell_product" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 __meta__ = {

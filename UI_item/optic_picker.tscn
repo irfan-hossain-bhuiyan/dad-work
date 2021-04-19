@@ -1,8 +1,30 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
 
-[node name="ItemList" type="ItemList"]
-margin_right = 40.0
-margin_bottom = 40.0
+[ext_resource path="res://themes/new_theme.tres" type="Theme" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends ItemList
+
+func choose_product():
+	visible=true
+	for x in Products.optics_name_list:
+		add_item(x)
+	var output=yield(self,\"item_activated\")
+	return Products.optics_list[output]
+
+
+
+	
+"
+
+[node name="product_list" type="ItemList"]
+margin_left = 328.0
+margin_top = 128.0
+margin_right = 560.0
+margin_bottom = 416.0
+theme = ExtResource( 1 )
+allow_reselect = true
+script = SubResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
