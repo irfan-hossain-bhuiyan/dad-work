@@ -1,7 +1,6 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://themes/new_theme.tres" type="Theme" id=1]
-[ext_resource path="res://fonts/droid-sans/DroidSans.tres" type="DynamicFont" id=2]
+[ext_resource path="res://themes/short_label.tres" type="Theme" id=1]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Label
@@ -9,9 +8,6 @@ func product_initiate(optic:Products.optics,amount:int):
 	text=optic.Name+\"   pcs:\"+str(amount)+\"   total price:\"+str(optic.buy_price*amount)
 
 "
-
-[sub_resource type="Theme" id=2]
-default_font = ExtResource( 2 )
 
 [node name="sell_label" type="Panel"]
 margin_right = 1024.0
@@ -42,7 +38,6 @@ margin_left = 488.0
 margin_top = 16.0
 margin_right = 624.0
 margin_bottom = 80.0
-theme = SubResource( 2 )
 prefix = "pcs:"
 __meta__ = {
 "_edit_use_anchors_": false
