@@ -1,6 +1,29 @@
-[gd_scene format=2]
+[gd_scene load_steps=3 format=2]
 
-[node name="PopupDialog" type="PopupDialog"]
-visible = true
+[ext_resource path="res://themes/middle_label.tres" type="Theme" id=1]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends PopupDialog
+func error_message(error:String):
+	$Label.text=error
+	popup()
+
+"
+
+[node name="errordialog" type="PopupDialog"]
 margin_right = 664.0
 margin_bottom = 288.0
+theme = ExtResource( 1 )
+script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 8.0
+margin_top = 56.0
+margin_right = 632.0
+margin_bottom = 208.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
