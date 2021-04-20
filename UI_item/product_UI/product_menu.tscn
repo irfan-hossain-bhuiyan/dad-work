@@ -15,9 +15,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="project_data_box" parent="." instance=ExtResource( 6 )]
-visible = false
-
 [node name="cover" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -28,16 +25,38 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="head_line2" type="Control" parent="cover"]
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+anchor_left = 0.016
+anchor_top = 1.059
+anchor_right = 1.008
+anchor_bottom = 4.412
+margin_left = -8.384
+margin_top = -491.4
+margin_right = 7.7439
+margin_bottom = -491.408
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollContainer"]
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="project_data_box" parent="." instance=ExtResource( 6 )]
+
+[node name="head_line2" type="Control" parent="."]
 anchor_right = 0.984
 anchor_bottom = 0.227
-margin_right = 8.38397
+margin_left = 8.0
+margin_right = 16.384
 margin_bottom = -0.200012
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="head_line" type="Label" parent="cover/head_line2"]
+[node name="head_line" type="Label" parent="head_line2"]
 anchor_left = 0.323
 anchor_top = 0.235
 anchor_right = 0.638
@@ -54,7 +73,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="add" type="Button" parent="cover/head_line2"]
+[node name="add" type="Button" parent="head_line2"]
 anchor_left = 0.777
 anchor_top = 0.338
 anchor_right = 0.85
@@ -68,23 +87,4 @@ text = "add"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="ScrollContainer" type="ScrollContainer" parent="cover/head_line2"]
-anchor_left = 0.016
-anchor_top = 1.059
-anchor_right = 1.008
-anchor_bottom = 4.412
-margin_left = -16.256
-margin_top = -0.0240021
-margin_right = -0.128052
-margin_bottom = -0.0320435
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="VBoxContainer" type="VBoxContainer" parent="cover/head_line2/ScrollContainer"]
-script = ExtResource( 4 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="button_down" from="cover/head_line2/add" to="." method="_on_add_button_down"]
+[connection signal="button_down" from="head_line2/add" to="." method="_on_add_button_down"]

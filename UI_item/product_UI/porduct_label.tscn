@@ -1,33 +1,27 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://themes/middle_label.tres" type="Theme" id=1]
-[ext_resource path="res://fonts/architect-s-daughter/ArchitectsDaughter32.tres" type="DynamicFont" id=2]
 [ext_resource path="res://themes/board_label.tres" type="Theme" id=3]
 
 [sub_resource type="GDScript" id=1]
-script/source = "extends Label
+script/source = "extends Control
 var optil_data:Products.optics
 func use_optics(optical_data:Products.optics):
 	$product_name.text=optical_data.Name
-	$pcs.text=optical_data.amount
-	$max_amount.text=optical_data.Max_stock
+	$pcs.text=str(optical_data.amount)
+	$max_amount.text=str(optical_data.Max_stock)
 	optil_data=optical_data
 
 
 "
 
-[node name="product_button" type="Label"]
+[node name="product_label" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 0.263
 margin_right = -1.69794
 margin_bottom = 0.199997
 rect_min_size = Vector2( 1000, 150 )
-custom_fonts/font = ExtResource( 2 )
-clip_text = true
 script = SubResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="product_name" type="Label" parent="."]
 anchor_left = 0.0237805
