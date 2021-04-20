@@ -7,9 +7,9 @@
 script/source = "extends Control
 var optil_data:Products.optics
 func use_optics(optical_data:Products.optics):
-	$product_name.text=optical_data.Name
-	$pcs.text=str(optical_data.amount)
-	$max_amount.text=str(optical_data.Max_stock)
+	$product_name.text=\"Name:\"+optical_data.Name
+	$pcs.text=\"pcs:\"+str(optical_data.amount)
+	$max_amount.text=\"max amount:\"+str(optical_data.Max_stock)
 	optil_data=optical_data
 
 
@@ -22,6 +22,9 @@ margin_right = -1.69794
 margin_bottom = 0.199997
 rect_min_size = Vector2( 1000, 150 )
 script = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="product_name" type="Label" parent="."]
 anchor_left = 0.0237805
