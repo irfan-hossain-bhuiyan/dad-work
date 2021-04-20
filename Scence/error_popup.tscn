@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="PopupDialog" type="PopupDialog"]
+visible = true
+margin_right = 664.0
+margin_bottom = 288.0

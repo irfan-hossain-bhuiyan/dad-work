@@ -1,0 +1,137 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://themes/middle_label.tres" type="Theme" id=1]
+[ext_resource path="res://themes/short_label.tres" type="Theme" id=2]
+[ext_resource path="res://Scripts/product_creator.gd" type="Script" id=3]
+
+[sub_resource type="GDScript" id=1]
+script/source = "extends Control
+func input_data():
+	return [$name_input.text,$price_input.value,$max_amount_input.value]
+
+"
+
+[node name="project_data_box" type="ConfirmationDialog"]
+visible = true
+anchor_left = 0.352
+anchor_top = 0.16
+anchor_right = 0.93
+anchor_bottom = 0.84
+margin_left = -0.447998
+margin_right = -0.320068
+margin_bottom = 24.0
+theme = ExtResource( 1 )
+window_title = "Project data"
+resizable = true
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel" type="Panel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = 8.0
+margin_right = -8.0
+margin_bottom = -66.0
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="label_group" type="Control" parent="."]
+anchor_left = 0.016
+anchor_right = 0.984
+anchor_bottom = 0.595
+margin_left = -1.472
+margin_top = 8.0
+margin_right = 1.47198
+margin_bottom = 108.96
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Name_label" type="Label" parent="label_group"]
+margin_left = 91.0
+margin_top = 84.0
+margin_right = 187.0
+margin_bottom = 128.0
+theme = ExtResource( 1 )
+text = "Name :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="price_label" type="Label" parent="label_group"]
+margin_left = 91.0
+margin_top = 168.0
+margin_right = 186.0
+margin_bottom = 212.0
+theme = ExtResource( 1 )
+text = "price :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="max_amount_label" type="Label" parent="label_group"]
+margin_left = 91.0
+margin_top = 264.0
+margin_right = 288.0
+margin_bottom = 308.0
+theme = ExtResource( 1 )
+text = "Max amount :"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="input_group" type="Control" parent="."]
+anchor_right = 0.984
+anchor_bottom = 0.666429
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 1.47198
+margin_bottom = 78.1028
+script = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true,
+"_edit_use_anchors_": true
+}
+
+[node name="name_input" type="LineEdit" parent="input_group"]
+margin_left = 200.0
+margin_top = 80.0
+margin_right = 400.0
+margin_bottom = 140.658
+theme = ExtResource( 1 )
+placeholder_text = "enter name"
+caret_blink = true
+caret_blink_speed = 0.5
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="price_input" type="SpinBox" parent="input_group"]
+margin_left = 200.0
+margin_top = 160.0
+margin_right = 382.0
+margin_bottom = 214.0
+theme = ExtResource( 1 )
+max_value = 100000.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="max_amount_input" type="SpinBox" parent="input_group"]
+margin_left = 304.0
+margin_top = 264.0
+margin_right = 450.0
+margin_bottom = 310.0
+theme = ExtResource( 2 )
+max_value = 100000.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="confirmed" from="." to="." method="_on_project_data_box_confirmed"]
+[connection signal="popup_hide" from="." to="." method="_on_project_data_box_popup_hide"]

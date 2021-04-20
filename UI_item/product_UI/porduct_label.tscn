@@ -1,27 +1,22 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://themes/short_label.tres" type="Theme" id=1]
+[ext_resource path="res://themes/middle_label.tres" type="Theme" id=1]
 [ext_resource path="res://fonts/architect-s-daughter/ArchitectsDaughter32.tres" type="DynamicFont" id=2]
-
+[ext_resource path="res://themes/board_label.tres" type="Theme" id=3]
 
 [sub_resource type="GDScript" id=1]
-script/source = "extends Button
+script/source = "extends Label
 var optil_data:Products.optics
-signal press_with_data(optic_data)
 func use_optics(optical_data:Products.optics):
 	$product_name.text=optical_data.Name
 	$pcs.text=optical_data.amount
 	$max_amount.text=optical_data.Max_stock
 	optil_data=optical_data
 
-	
 
-
-func _on_product_button_button_down():
-	emit_signal(\"press_with_data\",optil_data)
 "
 
-[node name="product_button" type="Button"]
+[node name="product_button" type="Label"]
 anchor_right = 1.0
 anchor_bottom = 0.263
 margin_right = -1.69794
@@ -29,10 +24,9 @@ margin_bottom = 0.199997
 rect_min_size = Vector2( 1000, 150 )
 custom_fonts/font = ExtResource( 2 )
 clip_text = true
-expand_icon = true
 script = SubResource( 1 )
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
 [node name="product_name" type="Label" parent="."]
@@ -44,26 +38,27 @@ margin_left = -0.375004
 margin_top = 0.0479994
 margin_right = 5.07498
 margin_bottom = -0.0380096
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 3 )
 text = "fdfdfdfdf"
 valign = 1
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
 [node name="pcs" type="Label" parent="."]
-anchor_left = 0.647317
+anchor_left = 0.647069
 anchor_top = 0.100949
-anchor_right = 0.975
-anchor_bottom = 0.759367
+anchor_right = 0.974639
+anchor_bottom = 0.354304
 margin_left = 0.499969
 margin_top = 0.05
 margin_right = -0.375
 margin_bottom = 0.019989
-custom_fonts/font = ExtResource( 2 )
+theme = ExtResource( 1 )
 text = "pcs:"
+valign = 1
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
 [node name="max_amount" type="Label" parent="."]
@@ -80,4 +75,3 @@ text = "max amount:"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="button_down" from="." to="." method="_on_product_button_button_down"]

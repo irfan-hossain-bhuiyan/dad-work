@@ -8,14 +8,9 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "EditorVCSInterface",
-"class": "GitAPI",
-"language": "NativeScript",
-"path": "res://git_api.gdns"
-} ]
+_global_script_classes=[  ]
 _global_script_class_icons={
-"GitAPI": ""
+
 }
 
 [application]
@@ -35,7 +30,7 @@ gdscript/warnings/shadowed_variable=false
 
 [gdnative]
 
-singletons=[ "res://git_api.gdnlib" ]
+singletons=[  ]
 
 [logging]
 

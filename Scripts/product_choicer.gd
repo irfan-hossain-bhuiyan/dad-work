@@ -1,6 +1,6 @@
 extends ScrollContainer
 signal out_button(opt_data)
-var button_obj=preload("res://UI_item/product_button.tscn")
+
 func input_data():
 	for x in Products.optics_list:
 		var temp=button_obj.instance()
