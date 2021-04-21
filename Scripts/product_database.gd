@@ -93,20 +93,14 @@ class sell_list:
 		return output
 
 class buy_list:
-	var products_amounts:PoolVector2Array
+	var products_amounts:product_amount
 	var total_cost:int
 	var date_time:Dictionary
-	func _init(products_amounts:PoolVector2Array):
+	func _init(products_amounts:product_amount):
 		self.products_amounts=products_amounts
 
 	func verify():
-		var total_cost:int=0
-		for pro_amo in products_amounts:
-			var product:=Products.optics_list[pro_amo.x] as optics
-			if product.amount+pro_amo.y>product.Max_stock:
-				return "doesn't have max storage for "+product.Name
-			total_cost+=product.buy_price*pro_amo.y
-		return total_cost
+		return product_amount.buy_varify()
 	func initiate():
 		var check=verify()
 		if check is int:
@@ -119,17 +113,9 @@ class buy_list:
 		return check
 	
 	func _export():
-		var products=[]
-		var amounts=[]
-		for pro_amo in products_amounts:
-			products.append(pro_amo.x)
-			amounts.append(pro_amo.y)
-		return [products,amounts,total_cost,date_time]
+		return [product_amount._export(),total_cost,date_time]
 	static func _import(array:Array)->buy_list:
-		var temp:PoolVector2Array=[]
-		for x in range(len(array[0])):
-			temp.append(Vector2(array[0][x],array[1][x]))
-		var output:=buy_list.new(temp)
+		var output:=buy_list.new()
 		output.date_time=array[3]
 		output.total_cost=array[2]
 		return output
@@ -168,4 +154,36 @@ class optics:
 		var output:=optics.new(array[0],array[1],array[2],array[3])
 		output.product_id=array[4]
 		return output
-
+class product_amount:
+	var product_amount_prices:PoolVector3Array
+	func add_data(optic:optics,amount:int):
+		product_amount_prices.append(Vector3(optic.product_id,amount,optic.buy_price*amount))
+	func all_price():
+		#This will output all the price with total
+		var total:int
+		var output:PoolIntArray
+		for x in product_amount_prices:
+			output.append(x.z)
+			total+=x.z
+		output.append(total)
+		return output
+	func _export():
+		return Array(product_amount_price)
+	static func _import(data:Array):
+		return product_amount.new()(PoolVector3Array(data)
+	func buy_varify():
+		for pro_amo in product_amount_prices:
+			var product=Products.optics_list[pro_amo.x]
+			var amount=pro_amo.y
+			if product.amount+amount>product.Max_stock:
+				return "doesn't have max storage for "+product.Name
+		return 0
+	func sell_varify():
+		for pro_amo in product_amount_prices:
+			var product=Products.optics_list[pro_amo.x]
+			var amount=pro_amo.y
+			if product.amount<amount:
+				return "doesn't have max storage for "+product.Name
+		return 0
+	
+		
