@@ -48,24 +48,26 @@ func data_exporter()->String:
 		output["buy_list_data"].append(buy_data._export())
 	return to_json(output)
 class sell_list:
-	var products_amounts:PoolVector2Array
-	var total_cost:int
+	var products_amounts:product_amount
+	var total_cost:PoolIntArray
 	var money:int
 	var date_time:Dictionary
-	func _init(products_amounts:PoolVector2Array,money:int):
+	func _init(products_amounts:product_amount,money:int):
 		self.products_amounts=products_amounts
 		self.money=money
 	
 	func varify():
-		var total_cost:int=0
-		for pro_amo in products_amounts:
-			var product:=Products.optics_list[pro_amo.x] as optics
-			if pro_amo.y>product.amount:
-				return "you are out of stock "+product.Name
-			total_cost+=product.buy_price*pro_amo.y
-		if money<total_cost:
-			return "you are losting money."
-		return money-total_cost
+		var check=products_amounts.sell_varify()
+
+		# var total_cost:int=0
+		# for pro_amo in products_amounts:
+		# 	var product:=Products.optics_list[pro_amo.x] as optics
+		# 	if pro_amo.y>product.amount:
+		# 		return "you are out of stock "+product.Name
+		# 	total_cost+=product.buy_price*pro_amo.y
+		# if money<total_cost:
+		# 	return "you are losting money."
+		# return money-total_cost
 	func initiate():
 		var check=varify()
 		if check is int:
@@ -94,30 +96,27 @@ class sell_list:
 
 class buy_list:
 	var products_amounts:product_amount
-	var total_cost:int
+	var total_cost:PoolIntArray
 	var date_time:Dictionary
 	func _init(products_amounts:product_amount):
 		self.products_amounts=products_amounts
 
 	func verify():
-		return product_amount.buy_varify()
+		return products_amounts.buy_varify()
 	func initiate():
-		var check=verify()
+		var check=products_amounts.varify()
 		if check is int:
-			for pro_amo in products_amounts:
-				var product:=Products.optics_list[pro_amo.x] as optics
-				product.amount+=pro_amo.y
-			total_cost=check
+			products_amounts.product_add()
 			date_time=OS.get_datetime()
 			Products.buy_list_data.append(self)
-		return check
+		return products_amounts.all_price()
 	
 	func _export():
 		return [product_amount._export(),total_cost,date_time]
 	static func _import(array:Array)->buy_list:
-		var output:=buy_list.new()
-		output.date_time=array[3]
-		output.total_cost=array[2]
+		var output:=buy_list.new(array[0]._import())
+		output.date_time=array[2]
+		output.total_cost=array[1]
 		return output
 
 class optics:
@@ -167,10 +166,32 @@ class product_amount:
 			total+=x.z
 		output.append(total)
 		return output
+	func product_sub():
+		var check=sell_varify()
+		if check is int:
+			#TODO:here it has to be fixed.
+			for pro_amo in product_amount_prices:
+				var product:=Products.optics_list[pro_amo.x] as optics
+				product.amount-=pro_amo.y
+		return check
+
+	func product_add():
+		var check=buy_varify()
+		if check is int:
+			#TODO:here it has to be fixed.
+			for pro_amo in product_amount_prices:
+				var product:=Products.optics_list[pro_amo.x] as optics
+				product.amount+=pro_amo.y
+		return check
+
+
+	
 	func _export():
-		return Array(product_amount_price)
+		return Array(product_amount_prices)
 	static func _import(data:Array):
-		return product_amount.new()(PoolVector3Array(data)
+		var temp=product_amount.new()
+		temp.product_amount_prices=PoolVector3Array(data)
+		return temp
 	func buy_varify():
 		for pro_amo in product_amount_prices:
 			var product=Products.optics_list[pro_amo.x]
@@ -185,5 +206,14 @@ class product_amount:
 			if product.amount<amount:
 				return "doesn't have max storage for "+product.Name
 		return 0
+	func get_product_list():
+		var output_array=[]
+		for pro in product_amount_prices:
+			pro=Products.optics_list[pro.x]
+			output_array.append(pro)
+		return output_array
 	
-		
+
+
+
+
