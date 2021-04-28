@@ -4,6 +4,12 @@ var optics_name_list=[]
 var sell_list_data=[]
 var buy_list_data=[]
 #TODO:Change pro_amo.y in every for loop to amount variable
+func debug_print():
+	for x in optics_list:
+		prints(x.Name,x.amount)
+
+	
+
 func file_load():
 	var save_file:File=File.new()
 	if save_file.file_exists("user://savegame.save"):
@@ -87,7 +93,7 @@ class buy_list:
 		return products_amounts.buy_varify()
 	
 	func initiate():
-		var check=products_amounts.verify()
+		var check=verify()
 		if check is int:
 			products_amounts.product_add()
 			date_time=OS.get_datetime()
@@ -115,7 +121,7 @@ class optics:
 	func varify()->String:
 		var output=""
 		if Name in Products.optics_name_list:
-			output+="name has been added previously/n"			
+			output+="name has been added previously\n"			
 		if Max_stock<=0:
 			output+="max_stock is 0 or less/n"
 		if buy_price<=0:
@@ -137,12 +143,16 @@ class optics:
 		return output
 class product_amount:
 	var product_amount_prices:PoolVector3Array
-	func add_data(optic:optics,amount:int):
-		product_amount_prices.append(Vector3(optic.product_id,amount,optic.buy_price*amount))
+	func add_data(optic,amount:int):
+		if optic is optics:
+			product_amount_prices.append(Vector3(optic.product_id,amount,optic.buy_price*amount))
+		elif optic is int:
+			product_amount_prices.append(Vector3(optic,amount,Products.optics_list[optic].buy_price*amount))
+
 	func all_price():
 		#This will output all the price with total
 		var total:int=0
-		var output:PoolIntArray
+		var output:PoolIntArray=[]
 		for x in product_amount_prices:
 			output.append(x.z)
 			total+=x.z
@@ -194,7 +204,7 @@ class product_amount:
 			var product=Products.optics_list[pro_amo.x]
 			var amount=pro_amo.y
 			if product.amount<amount:
-				return "doesn't have max storage for "+product.Name
+				return "doesn't have supply for "+product.Name
 		return 0
 	func get_product_list():
 		var output_array=[]

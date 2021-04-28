@@ -1,14 +1,27 @@
-extends Node2D
-func _ready():
-	print("Start")
-	print(Products.optics.new("A",20,100).initiate())
-	print(Products.optics.new("B",10,50).initiate())
-	print(Products.optics.new("A",20,100).initiate())
-	print(Products.optics.new("C",15,10).initiate())
-	print(Products.buy_list.new([Vector2(0,10),Vector2(1,5),Vector2(2,7)]).initiate())
-	print(Products.sell_list.new([Vector2(0,10),Vector2(1,5),Vector2(2,5)],12950).initiate())
-	Products.file_save()
-	for x in Products.optics_list:
-		prints(x.Name,x.amount)
+extends "res://Scripts/product_database.gd"
+func _ready() -> void:
+	print(optics.new("A",10,50).initiate())
+	print(optics.new("B",5,10).initiate())
+	print(optics.new("C",15,30).initiate())
+	print(optics.new("D",20,40).initiate())
+	print(optics.new("A",100,2).initiate())
+	var pro_amo1:=product_amount.new()
+	pro_amo1.add_data(0,5)
+	pro_amo1.add_data(1,5)
+	pro_amo1.add_data(2,10)
+	var buy:=buy_list.new(pro_amo1)
+	buy.initiate()
+	sell_list.new(pro_amo1,1000).initiate()
+	print(sell_list.new(pro_amo1,1000).initiate())
+	file_save()
+	debug_print()
+	
+	
 
-		
+
+	
+
+	
+	
+	
+
