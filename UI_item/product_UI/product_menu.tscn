@@ -44,7 +44,7 @@ __meta__ = {
 }
 
 [node name="project_data_box" parent="." instance=ExtResource( 6 )]
-visible = false
+rect_min_size = Vector2( 150, 52.5 )
 
 [node name="head_line2" type="Control" parent="."]
 anchor_right = 0.984
@@ -87,4 +87,5 @@ text = "add"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
 [connection signal="button_down" from="head_line2/add" to="." method="_on_add_button_down"]
